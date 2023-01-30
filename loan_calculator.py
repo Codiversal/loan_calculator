@@ -54,7 +54,7 @@ def calculate_payment():
     df = pd.DataFrame(data)
     #Προσθέτουμε στην τελευταία σειρά το συνολικό ποσό που θα πληρώσουμε στην τράπεζα
     df.at[(len(df)+1), "Έτη Αποπληρωμής" ] = "Συνολική Πληρωμή"
-    df.at[(len(df)), "Τοκοχρεολύσιο"] = number_to_euro(synoliko_poso_pliromis) 
+    df.at[(len(df)), "Τοκοχρεολύσιο"] = number_to_euro(synoliko_poso_pliromis)
     #Δοκιμάζουμε να εξάγουμε το πλαίσιο δεδομένων σε αρχείο excel
     try:
         df.to_excel("Υπολογισμός Δανείου.xlsx", index = False)
@@ -64,13 +64,13 @@ def calculate_payment():
     except:
         import win32com.client
         #Αλλάξτε το τμήμα "C:/path/to/file/" ώστε να σας οδηγεί στον φάκελο που αποθηκεύσατε τον κώδικα
-        file_path = os.path.abspath("C:/path/to/file/Υπολογισμός Δανείου.xlsx")
+        file_path = os.path.abspath("C:/Users/Cryoart/Desktop/Υπολογισμός Δανείου.xlsx")
         excel = win32com.client.GetObject(file_path)
         excel.Close(SaveChanges=0)
         df.to_excel("Υπολογισμός Δανείου.xlsx", index = False)
         minima_label.config(text = f"Μηνιαία Δόση Δανείου: {number_to_euro(tokoxreolisio/12)}€")
         os.startfile("Υπολογισμός Δανείου.xlsx")
-#Δημιουργούμε το παράθυρο με την βοήθεια της βιβλιοθήκης tkinter         
+#Δημιουργούμε το παράθυρο με την βοήθεια της βιβλιοθήκης tkinter
 root = tk.Tk()
 #Δίνουμε τον τίτλο του παραθύρου
 root.title("Υπολογιστής Δανείου")
@@ -100,11 +100,11 @@ eti_apopliromis_entry.grid(row=2, column=2)
 just_a_gap = tk.Label(root, text="\t")
 just_a_gap.grid(row=0, column = 1)
 
-#Δημιουργούμε το κουμπί που θα υπολογίσει το ποσό του δανείου και θα κάνει εξαγωγή του αρχείου excel 
+#Δημιουργούμε το κουμπί που θα υπολογίσει το ποσό του δανείου και θα κάνει εξαγωγή του αρχείου excel
 ypologismos_button = tk.Button(root, text="Υπολογισμός", command=calculate_payment)
 ypologismos_button.grid(row=3, column=0, columnspan=3, pady=10)
 
-#Δημιουργούμε μία ετικέτα που θα ενημερώσουμε για να εμφανιστεί στον χρήστη η μηνιαία δόση του δανείου του 
+#Δημιουργούμε μία ετικέτα που θα ενημερώσουμε για να εμφανιστεί στον χρήστη η μηνιαία δόση του δανείου του
 minima_label = tk.Label(root, text="")
 minima_label.grid(row=4, column=0, columnspan=3)
 
